@@ -1,0 +1,25 @@
+.App {
+    width: 100dvw;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #2f74c0;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.heading {
+    text-transform: uppercase;
+    font-size: 40px;
+    margin: 30px 0;
+    color: white;
+    z-index: 1;
+    text-align: center;
+}
+
+@media screen and (width<800px) {
+    .heading {
+        margin: 15px 0;
+        font-size: 35px;
+    }
+}
