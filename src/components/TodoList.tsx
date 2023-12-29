@@ -1,22 +1,29 @@
+// Imported necessary libraries and component
 import React from "react";
 import "./style.css";
 import { Todo } from "../model";
 import SingleTodo from "./SingleTodo";
 import { Droppable } from "react-beautiful-dnd";
+
+// Defined interface for props
 interface Props {
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   completedTodos: Todo[];
   setCompletedTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
 }
+
+// Main component
 const TodoList: React.FC<Props> = ({
   todos,
   setTodos,
   completedTodos,
   setCompletedTodos,
 }) => {
+  // Renders the component
   return (
     <div className="container">
+      {/* Active tasks */}
       <Droppable droppableId="TodosList">
         {(provided, snapshot) => (
           <div
@@ -38,6 +45,7 @@ const TodoList: React.FC<Props> = ({
           </div>
         )}
       </Droppable>
+      {/* Completed tasks */}
       <Droppable droppableId="TodosRemove">
         {(provided, snapshot) => (
           <div

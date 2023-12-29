@@ -1,19 +1,26 @@
+// Imported necessary libraries and component
 import React, { useState } from "react";
 import { Todo } from "../model";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { MdDone } from "react-icons/md";
 import "./style.css";
 import { Draggable } from "react-beautiful-dnd";
+
+// Defined interface for props
 interface Props {
   todo: Todo;
   todos: Todo[];
   setTodos: React.Dispatch<React.SetStateAction<Todo[]>>;
   index: number;
 }
+
+// Main component
 const SingleTodo: React.FC<Props> = ({ todo, todos, setTodos, index }) => {
+  // Defined state management hooks
   const [edit, setEdit] = useState<boolean>(false);
   const [editText, setEditText] = useState<string>(todo.todo);
 
+  // Handles completion of todo item in list
   const handleDone: (id: number) => void = (id) => {
     setTodos(
       todos.map((todo) =>
@@ -22,10 +29,12 @@ const SingleTodo: React.FC<Props> = ({ todo, todos, setTodos, index }) => {
     );
   };
 
+  // Handles deletion of todo item in list
   const handleDelete: (id: number) => void = (id) => {
     setTodos(todos.filter((todo) => todo.id !== id));
   };
 
+  // Handles editing of todo item in list
   const handleEdit: (e: React.FormEvent, id: number) => void = (e, id) => {
     e.preventDefault();
     setTodos(
@@ -34,6 +43,7 @@ const SingleTodo: React.FC<Props> = ({ todo, todos, setTodos, index }) => {
     setEdit(false);
   };
 
+  // Renders the component
   return (
     <Draggable draggableId={todo.id.toString()} index={index}>
       {(provided, snapshot) => (
@@ -56,6 +66,7 @@ const SingleTodo: React.FC<Props> = ({ todo, todos, setTodos, index }) => {
               {todo.isDone ? <s>{todo.todo}</s> : todo.todo}
             </span>
           )}
+
           <div className="icon__container">
             <span
               className="icon"

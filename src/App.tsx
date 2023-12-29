@@ -1,13 +1,19 @@
+// Imported necessary libraries and component
 import React, { useState } from "react";
 import "./App.css";
 import InputField from "./components/InputField";
 import { Todo } from "./model";
 import TodoList from "./components/TodoList";
 import { DragDropContext, DropResult } from "react-beautiful-dnd";
+
+// Main component
 const App: React.FC = () => {
+  // Defined necessary variables and state management hooks
   const [todo, setTodo] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
   const [completedTodos, setCompletedTodos] = useState<Todo[]>([]);
+
+  // Handles the inputs
   const handleAdd: (e: React.FormEvent) => void = (e) => {
     e.preventDefault();
     if (todo) {
@@ -16,6 +22,7 @@ const App: React.FC = () => {
     }
   };
 
+  // Handles drag and drop operations
   const onDragEnd: (result: DropResult) => void = (result) => {
     const { source, destination } = result;
     // returning on no output
@@ -45,11 +52,17 @@ const App: React.FC = () => {
     setTodos(active);
     setCompletedTodos(complete);
   };
+
+  // Renders the component
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <div className="App">
-        <span className="heading">Taskify</span>
+        <span className="heading" data-testid="TodoListHeading">
+          Taskify
+        </span>
+
         <InputField todo={todo} setTodo={setTodo} handleAdd={handleAdd} />
+
         <TodoList
           todos={todos}
           setTodos={setTodos}
