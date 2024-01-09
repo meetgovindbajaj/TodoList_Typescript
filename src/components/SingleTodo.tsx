@@ -62,7 +62,7 @@ const SingleTodo: React.FC<Props> = ({ todo, todos, setTodos, index }) => {
               autoFocus
             />
           ) : (
-            <span className="todos__single--text">
+            <span className="todos__single--text" data-testid="singleTodo">
               {todo.isDone ? <s>{todo.todo}</s> : todo.todo}
             </span>
           )}
